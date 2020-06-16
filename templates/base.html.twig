@@ -8,56 +8,87 @@
         <meta name="author" content="GD">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+        <link rel="stylesheet" href="/css/styles.css">
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-    	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    	  <a class="navbar-brand" href="{{path('home')}}">Gaëlle D.</a>
-    	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    	    <span class="navbar-toggler-icon"></span>
-    	  </button>
-
-    	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    	    <ul class="navbar-nav mr-auto">
-    	    	<li class="nav-item">
-                	<a class="nav-link {% if page_name is defined and page_name == 'Accueil'%}disabled{%endif%}"  href="#">Accueil</a>
-              	</li>
-              	<li class="nav-item dropdown">
-                	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                 Réalisations
-                	</a>
-	                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-	                    <a class="dropdown-item" target="_blank" href="#" aria-disabled="true">Projet1</a>
-	                  	<a class="dropdown-item" target="_blank" href="#" aria-disabled="true">Projet2</a>
-	                  	<a class="dropdown-item" target="_blank" href="#" aria-disabled="true">Projet3</a>
-	                </div>
+      <div class="container">
+      	<nav class="navbar navbar-expand-lg navbar-perso">
+        	  <a class="navbar-brand" href="{{path('home')}}">Gaëlle D.</a>
+        	  <button class="navbar-toggler dark-btn" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        	    <span class="navbar-toggler-icon dark-btn"><i class="fas fa-caret-down"></i></span>
+        	  </button>
+      	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      	    <ul class="navbar-nav mr-auto">
+      	    	<li class="nav-item">
+                <a class="nav-link" style="{% if page_name is defined and page_name == 'Accueil'%}display:none;{%endif%}"  href="{{ path('home')}}">Accueil</a>
+              </li>
+              <li class="nav-item dropdown">
+              	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               Réalisations
+              	</a>
+                <div class="dropdown-menu light-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item " target="_blank" href="#" aria-disabled="true">Projet1</a>
+                  	<a class="dropdown-item" target="_blank" href="#" aria-disabled="true">Projet2</a>
+                  	<a class="dropdown-item" target="_blank" href="#" aria-disabled="true">Projet3</a>
+                </div>
               </li>
               <li class="nav-item">
-                <a class="nav-link"  href="#">Présentation</a>
+                <a class="nav-link"  href="#presentation">Présentation</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="#" target="_blank">Quelques sigles</a>
+                <a class="nav-link " href="#framework" >Quelques outils</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="#" target="_blank">Recommandations (??)</a>
+                <a class="nav-link " href="#testimonials" >Retour d'expérience</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " href="#" target="_blank">Me contacter</a>
+                <a class="nav-link " href="#contact" >Me contacter</a>
               </li>
-    	    </ul>
-    	  </div>
-    	</nav>
-    	<div class="jumbotron text-center">
-    		<h1>
-    			{% block jumbotron %}{% endblock %}
-    		</h1>
-    	</div>
-    	
+              <li>
+                {% if app.user %}
+                  <a class="nav-link " href="{{path('logout')}}" aria-disabled="true">Se déconnecter</a>
+                {% endif %}
+                
+              </li>
+      	    </ul>
+      	  </div>
+      	</nav>
+      </div>
+      
+        
+        
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+
+
+      <footer class="base-footer footer h-auto"> <!-- fixed-bottom -->
+        <div class="row id-footer">
+          <div class="col-md-4 text-center align-middle">
+            <i class="fas fa-map-marked-alt "></i>
+            <p>Toulouse ~ Grenoble</p>
+          </div>
+          <div class="col-md-4 text-center align-middle">
+            <i class="fas fa-mobile"></i>
+              <p><a href="tel:+33683086646">06.83.08.66.46</a></p>
+          </div>
+          <div class="col-md-4 text-center align-middle">
+            <i class="fas fa-envelope"></i>
+            <p><a href="mailto:gaelle.david@egaliscope.fr">gaelle.david@egaliscope.fr</a></p>
+              
+          </div>
+          
+        </div>
+        <div class="row colofon dark-part">     
+          <div class="col-12 text-center align-middle my-auto"><a href ="#" class="colorlink footerlink">Politique de confidentialité</a></div>
+          <div class="col-12 text-center align-middle copyright my-auto ">Gaëlle D. ~ {{"now"|date("Y")}}</div>
+        </div>  
+      </footer>
+
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+        {% block javascripts %}{% endblock %}
     </body>
 </html>
 
