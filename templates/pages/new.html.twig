@@ -11,7 +11,7 @@
 			{{ error.messageKey | trans(error.messagedata, 'security') }}
 		</div>
 	{% endif %}
-	{{ include('security/_form-secu.html.twig', {form: form, button: 'S\'inscrire'}) }}
+	{{ include('pages/_form-pj.html.twig', {form: form, button: 'S\'inscrire'}) }}
 <a href="{{ path('login') }}">Déjà inscrit·e ? Se connecter, c'est par ici !</a>
 </div>
 </section>
