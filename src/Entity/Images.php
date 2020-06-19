@@ -23,6 +23,11 @@ class Images
     private $name;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $field;
+
+    /**
      * @ORM\ManyToOne(targetEntity=Projets::class, inversedBy="images")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -44,6 +49,19 @@ class Images
 
         return $this;
     }
+
+    public function getField(): ?string
+    {
+        return $this->field;
+    }
+
+    public function setField(string $field): self
+    {
+        $this->field = $field;
+
+        return $this;
+    }
+
 
     public function getProject(): ?Projets
     {

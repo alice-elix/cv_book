@@ -37,21 +37,28 @@ class PagesController extends AbstractController
 	}
 
     /**
-     * @Route("/projet-{name}", name="project_show")
-     * param Projet $projet
+     * @Route("/projet-{id}", name="project_show")
+     * @param Request $request
+     * @param Projets $projet
      */
-    public function show(Projet $projet, string $name)
+    public function show(string $id)
     {
-    	if($projet->getStructureName() !== $name){
-    		return $this->redirectToRoute('show', [
-    			'name' => $projet->getStructureName()
-    		], 301);
-    	}
-
+    	$em = $this->getDoctrine()->getManager(); 
+    	$projet = $em->getRepository(Projets::class)->find($id);
+    	$photos = $em->getRepository(Images::class)->findAll(['id'=>$projet]);
+    	$presentationPict = $em->getRepository(Images::class)->findByField('presentation_pict', $id);	
+    	$contextPict = $em->getRepository(Images::class)->findByField('context_pict', $id);
+    	$frameworkPict = $em->getRepository(Images::class)->findByField('framework_pict', $id);
+    	$resultPict = $em->getRepository(Images::class)->findByField('result_picture', $id);
 
         return $this->render('pages/show.html.twig', [
             'page_name' => 'Projet',
-            'projet' => $projet
+            'projet' => $projet,
+            'photos' => $photos,
+            'presentation'=> $presentationPict ?? [],
+            'context'=> $contextPict ?? [],
+            'framework'=> $frameworkPict ?? [],
+            'result'=> $resultPict ?? []
         ]);
     }
 
@@ -71,11 +78,12 @@ class PagesController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
 			/** @var UploadedFile $presentationPictFile */
 			$presentationPictFile = $form->get('presentation_pict')->getData();
+			$presentationPictField = $form->get('presentation_pict')->getName();
 
 			if ($presentationPictFile){
 				$originalFilename = pathinfo($presentationPictFile->getClientOriginalName(), PATHINFO_FILENAME);
 				$safeFilename = $slugger->slug($originalFilename);
-				$presentationPictFileName = $safeFilename.'-'.uniqid().'-'.$presentationPictFile->guessExtension();
+				$presentationPictFileName = $safeFilename.'-'.uniqid().'.'.$presentationPictFile->guessExtension();
 				$presentationPictFile->move(
 					$this->getParameter('images_directory'),
 					$presentationPictFileName
@@ -85,16 +93,18 @@ class PagesController extends AbstractController
 			/*stock l'image en bdd - son nom*/
 			$img1 = new Images();
 			$img1->setName($presentationPictFileName);
+			$img1->setField($presentationPictField);
 			$pj->addImage($img1);
 
 
 			/** @var UploadedFile $contextPictFile */
 			$contextPictFile = $form->get('context_pict')->getData();
+			$contextPictField = $form->get('context_pict')->getName();
 
 			if ($contextPictFile){
 				$originalFilename = pathinfo($contextPictFile->getClientOriginalName(), PATHINFO_FILENAME);
 				$safeFilename = $slugger->slug($originalFilename);
-				$contextPictFileName = $safeFilename.'-'.uniqid().'-'.$contextPictFile->guessExtension();
+				$contextPictFileName = $safeFilename.'-'.uniqid().'.'.$contextPictFile->guessExtension();
 				$contextPictFile->move(
 					$this->getParameter('images_directory'),
 					$contextPictFileName
@@ -104,47 +114,55 @@ class PagesController extends AbstractController
 			/*stock l'image en bdd - son nom*/
 			$img2 = new Images();
 			$img2->setName($contextPictFileName);
+			$img2->setField($contextPictField);
 			$pj->addImage($img2);
 
 			/** @var UploadedFile $frameworkPictFiles */
-			$frameworkPictFile = $form->get('framework_pict')->getData();
+			$frameworkPictFiles = $form->get('framework_pict')->getData();
+			$frameworkPictField = $form->get('framework_pict')->getName();
 
-			if ($frameworkPictFile){
-				$originalFilename = pathinfo($frameworkPictFile->getClientOriginalName(), PATHINFO_FILENAME);
-				$safeFilename = $slugger->slug($originalFilename);
-				$frameworkPictFileName = $safeFilename.'-'.uniqid().'-'.$frameworkPictFile->guessExtension();
-				$frameworkPictFile->move(
-					$this->getParameter('images_directory'),
-					$frameworkPictFileName
-				);
-				$pj->setFrameworkPict($frameworkPictFileName);
-			}	
-			/*stock l'image en bdd - son nom*/
-			$img3 = new Images();
-			$img3->setName($frameworkPictFileName);
-			$pj->addImage($img3);
+			foreach ($frameworkPictFiles as $frameworkPictFile){
+				if ($frameworkPictFile){
+					$originalFilename = pathinfo($frameworkPictFile->getClientOriginalName(), PATHINFO_FILENAME);
+					$safeFilename = $slugger->slug($originalFilename);
+					$frameworkPictFileName = $safeFilename.'-'.uniqid().'-'.$frameworkPictFile->guessExtension();
+					$frameworkPictFile->move(
+				 		$this->getParameter('images_directory'),
+				 		$frameworkPictFileName
+				 	);
+				 	$pj->setFrameworkPict($frameworkPictFileName);
+				 }	
+				/*stock l'image en bdd - son nom*/
+				$img3 = new Images();
+				$img3->setName($frameworkPictFileName);
+				$img3->setField($frameworkPictField);
+				$pj->addImage($img3);
+			}
 			
 			/** @var UploadedFile $resultPictFiles */
-			$resultPictFile = $form->get('result_picture')->getData();
+			$resultPictFiles = $form->get('result_picture')->getData();
+			$resultPictField = $form->get('result_picture')->getName();
 
-			if ($resultPictFile){
-				$originalFilename = pathinfo($resultPictFile->getClientOriginalName(), PATHINFO_FILENAME);
-				$safeFilename = $slugger->slug($originalFilename);
-				$resultPictFileName = $safeFilename.'-'.uniqid().'.'.$resultPictFile->guessExtension();
-				$resultPictFile->move(
-					$this->getParameter('images_directory'),
-					$resultPictFileName
-				);
-				$pj->setResultPicture($resultPictFileName);
+			foreach ($resultPictFiles as $resultPictFile) 
+			{
+				if ($resultPictFile){
+					$originalFilename = pathinfo($resultPictFile->getClientOriginalName(), PATHINFO_FILENAME);
+					$safeFilename = $slugger->slug($originalFilename);
+					$resultPictFileName = $safeFilename.'-'.uniqid().'.'.$resultPictFile->guessExtension();
+					$resultPictFile->move(
+						$this->getParameter('images_directory'),
+						$resultPictFileName
+					);
+					$pj->setResultPicture($resultPictField);
+				}
+				/*stock l'image en bdd - son nom*/
+				$img4 = new Images();
+				$img4->setName($resultPictFileName);
+				$img4->setField($resultPictField);
+				$pj->addImage($img4);
+				
 			}
-			/*stock l'image en bdd - son nom*/
-			$img4 = new Images();
-			$img4->setName($resultPictFileName);
-			$pj->addImage($img4);
-			
-
-
-
+				
 
 			/*inscription en bdd*/
             $em = $this->getDoctrine()->getManager(); 

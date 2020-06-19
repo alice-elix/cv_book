@@ -19,8 +19,78 @@
 	<div class="form-group">
 		<div class="row">
 			<div class="col-12 col-form">
+			{{ form_label(form.catchy_sentence) }} 
+			{{ form_widget(form.catchy_sentence, { 'attr': {'class': 'form-control' }} )}}</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="row">
+			<div class="col-12 col-form">
+			{{ form_label(form.presentation_paragraph) }} 
+			{{ form_widget(form.presentation_paragraph, { 'attr': {'class': 'form-control' }} )}}</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="row">
+			<div class="col-12 col-form">
+			{{ form_label(form.presentation_pict) }} 
+			{{ form_widget(form.presentation_pict, { 'attr': {'class': 'form-control' }} )}}</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="row">
+			<div class="col-12 col-form">
+			{{ form_label(form.context_paragraph) }} 
+			{{ form_widget(form.context_paragraph, { 'attr': {'class': 'form-control' }} )}}</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="row">
+			<div class="col-12 col-form">
+			{{ form_label(form.context_pict) }} 
+			{{ form_widget(form.context_pict, { 'attr': {'class': 'form-control' }} )}}</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="row">
+			<div class="col-12 col-form">
+			{{ form_label(form.explain_paragraph) }} 
+			{{ form_widget(form.explain_paragraph, { 'attr': {'class': 'form-control' }} )}}</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="row">
+			<div class="col-12 col-form">
+			{{ form_label(form.framework_name) }} 
+			{{ form_widget(form.framework_name, { 'attr': {'class': 'form-control' }} )}}</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="row">
+			<div class="col-12 col-form">
+			{{ form_label(form.framework_pict) }} 
+			{{ form_widget(form.framework_pict, { 'attr': {'class': 'form-control' }} )}}</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="row">
+			<div class="col-12 col-form">
+			{{ form_label(form.result_paragraph) }} 
+			{{ form_widget(form.result_paragraph, { 'attr': {'class': 'form-control' }} )}}</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="row">
+			<div class="col-12 col-form">
+			{{ form_label(form.result_picture) }} 
+			{{ form_widget(form.result_picture, { 'attr': {'class': 'form-control' }} )}}</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="row">
+			<div class="col-12 col-form">
 				{{ form_widget(form) }}
-				<button type="submit" class="btn btn-login">{{ button|default('Se connecter') }}</button>
+				<button type="submit" class="btn btn-login">{{ button|default('Enregistrer le projet') }}</button>
 			</div>
 		</div>	
 	</div>

@@ -33,28 +33,36 @@
 	outline: none;
 }
 /*image inside the circle*/
-#circle1{
+#circle1,
+#circle1Bis{
 	background:  url(../images/html2.png) no-repeat center center;	
 }
-#circle2{
+#circle2,
+#circle2Bis{
 	background:  url(../images/css2.png) no-repeat center center;	
 }
-#circle3{
+#circle3,
+#circle3Bis{
 	background:  url(../images/js3.png) no-repeat center center;
 }
-#circle4{
+#circle4,
+#circle4Bis{
 	background:  url(../images/jq2.png) no-repeat center center;	
 }
-#circle5{
+#circle5,
+#circle5Bis{
 	background:  url(../images/php3.png) no-repeat center center;	
 }
-#circle6{
+#circle6,
+#circle6Bis{
 	background:  url(../images/sf2.png) no-repeat center center;
 }
-#circle7{
+#circle7,
+#circle7Bis{
 	background:  url(../images/sql2.png) no-repeat center center;	
 }
-#circle8{
+#circle8,
+#circle8Bis{
 	background:  url(../images/mysql3.png) no-repeat center center;	
 }
 

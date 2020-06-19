@@ -1,18 +1,121 @@
 {% extends 'base.html.twig' %}
+{% block stylesheets %}
+
+<link rel="stylesheet" href="/css/context{{projet.getId()}}.css">
+
+{% endblock %}
 
 {% block title %}{{ page_name }}{% endblock %}
 
 
 {% block body %}
-<section class="dark-part" id="register">
-<div class="container ">
-	{% if error %}
-		<div class="alert alert-danger">
-			{{ error.messageKey | trans(error.messagedata, 'security') }}
+
+<section id="resum" class="dark-part">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h1 class="text-center">{{ projet.getStructureName()}} </h1>
+				<h2 class="text-center"><em>{{ projet.getHeaderStructure()}}</em></h2>
+				<h3>{{ projet.getCatchySentence()}} - <em>Phrase cool et courte de présentation</em> - </h3>
+			</div>
 		</div>
-	{% endif %}
-	{{ include('pages/_form-pj.html.twig', {form: form, button: 'S\'inscrire'}) }}
-<a href="{{ path('login') }}">Déjà inscrit·e ? Se connecter, c'est par ici !</a>
-</div>
+		<div class="row">
+			<div class="col-4">
+				{% for p in presentation %}
+				<img src="{{ asset('/uploads/pictures/' ~ p.getName()) }}" class="img-fluid"/>
+				{% endfor %}
+			</div>
+			<div class="col-8">
+				<p>{{ projet.getPresentationParagraph()|striptags|raw|nl2br }}<em> ici, le paragraphe de présentation</em></p>
+				<!-- <p>Ces petites annotations : |striptags|raw|nl2br permettent de faire apparaitre le texte avec les espaces et les retours à la ligne ! ;)</p> -->
+			</div>
+		</div>
+	</div>	
 </section>
+<section id="context">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h2>Contextualisation</h2>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-8">
+				<p>
+					{{ projet.getContextParagraph()|striptags|raw|nl2br }}
+				</p>
+			</div>
+			{% for c in context %}
+			<div class="col-4">
+				<img src="{{ asset('/uploads/pictures/' ~ c.getName()) }}" class="img-fluid"/>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+</section>
+<section id="project" class="dark-part">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h2>Pour entrer dans les détails</h2>	
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12 ">
+				<p>Je pense que ça serait bien de tout détailler dans un seul paragraphe. Ne pas faire une partie dédiée aux outils, ça va être relou et redondant. </p>
+				<p>
+					{{ projet.getExplainParagraph()|striptags|raw|nl2br }}
+				</p>	
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		{% for f in framework %}
+		<div class="col-2">
+			<img src="{{ asset('/uploads/pictures/' ~ f.getName()) }}" class="img-fluid"/>	
+		</div>
+		{% endfor %}
+	</div>
+</section>
+<section>
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<h2>Le résultat</h2>	
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-4">
+				<p>
+					{{ projet.getResultParagraph()|striptags|raw|nl2br }}
+				</p>
+			</div>
+			<div class="col-8">  
+				<div class="row d-flex justify-center">	
+					{% for r in result %}
+					<div class="col-5">
+						<img src="{{ asset('/uploads/pictures/' ~ r.getName()) }}" class="img-fluid"/>
+					</div>
+					{% endfor %}	
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section id="contact" class="dark-part">
+	<div class="container text-center">
+		<h2>Vous voulez en savoir plus sur ce projet ? </h2>
+		<p>En m'écrivant, vous pourrez avoir toutes les informations non disponible sur le site, telles que les noms des responsables, des clients et le lien pour consulter ce code sur GitHub.  </p>
+		<p>Mettre dans le formulaire de contact un champ pré-rempli qui contient le nom de la structure "{{ projet.getStructureName()}}"</p>
+		<button class="btn btn-login" type="button" data-toggle="collapse" data-target="#collapseForm" aria-expanded="false" aria-controls="collapseForm">Formulaire de contact</button>
+    	<div class="collapse" id="collapseForm">
+      		<div class="card card-body light-part">
+        		Ici le formulaire de contact
+      		</div>
+    	</div>
+	</div>
+</section>
+
+
+
 {% endblock %}

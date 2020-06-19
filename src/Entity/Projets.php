@@ -100,6 +100,21 @@ class Projets
 
     /**
      * @ORM\Column(type="text",nullable=true)
+     * @Assert\Length(
+     *      min = 3,
+     *      minMessage = "Votre paragraphe pour les logos des technos doit avoir au moins {{ limit }} lettres",
+            allowEmptyString = false
+     * )
+     */
+    private $framework_name;
+
+    /**
+     * @ORM\Column(type="text",nullable=true)
+     */
+    private $framework_pict;
+
+    /**
+     * @ORM\Column(type="text",nullable=true)
      */
     private $result_picture;
 
