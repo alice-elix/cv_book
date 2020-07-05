@@ -110,11 +110,21 @@ class Projets
 
     /**
      * @ORM\Column(type="text",nullable=true)
+     * @Assert\File(
+     *     maxSize = "1024k",
+     *     mimeTypes = {"image/jpg", "image/png", "image/jpeg"},
+     *     mimeTypesMessage = "Merci de choisir des fichiers au format image"
+     * )
      */
     private $framework_pict;
 
     /**
      * @ORM\Column(type="text",nullable=true)
+     * @Assert\File(
+     *     maxSize = "1024k",
+     *     mimeTypes = {"image/jpg", "image/png", "image/jpeg"},
+     *     mimeTypesMessage = "Merci de choisir des fichiers au format image"
+     * )
      */
     private $result_picture;
 

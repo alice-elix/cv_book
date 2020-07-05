@@ -1,0 +1,5 @@
+.col-4{
+	background: url(../images/context_bee.png),	radial-gradient(circle, #feeeec, #feeeec, #feeeec, #feeeec, #feeeec, #feefef, #fef1f2, #fef2f4, #fdf5f9, #fdf9fc, #fdfcfe, #ffffff);
+	background-repeat: no-repeat;
+	background-position: 98%, 2%; 
+}

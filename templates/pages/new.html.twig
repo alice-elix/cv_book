@@ -6,11 +6,12 @@
 {% block body %}
 <section class="dark-part" id="register">
 <div class="container ">
-	{% if error %}
-		<div class="alert alert-danger">
-			{{ error.messageKey | trans(error.messagedata, 'security') }}
+	{% for message in app.flashes('success') %}
+		<div class="alert alert-success">
+			{{ message }}
 		</div>
-	{% endif %}
+	{% endfor %}
+
 	{{ include('pages/_form-pj.html.twig', {form: form }) }}
 
 </div>

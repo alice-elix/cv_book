@@ -1,0 +1,27 @@
+{% extends 'baseMail.html.twig' %}
+
+{% block title %}Email de contact Accueil{% endblock %}
+
+{% block body %}
+<section class="dark-part" id="login">
+	
+	<div class="container ">
+		<div class="card">
+			<div class="card-body">
+				<div class="card-title">
+					<h2> Prise de contact depuis le formulaire<strong> de l'accueil</strong></h2>
+				</div>
+				<div class="card-text">
+					<p>Message enoyé par : {{ contacte }} </p>
+					<p>Email : {{ email }}~~ num de tel : {{ num }}</p>
+					<p>Objet : {{ objet }}</p>
+					<p>Message : {{ message|striptags|raw|nl2br }}</p>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+
+</section>
+
+{% endblock %}

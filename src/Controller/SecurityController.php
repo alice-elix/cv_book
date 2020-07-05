@@ -56,9 +56,9 @@ class SecurityController extends AbstractController
     	$form->handleRequest($request);
 
     	if($form->isSubmitted() && $form->isValid()){
-
+            $safe = array_map('trim', array_map('strip_tags', $_POST));
     		$em = $this->getDoctrine()->getManager(); 
-    	    $password = $_POST["inscription"]["password"];
+    	    $password = $safe["inscription"]["password"];
 
     		$user->setPassword($this->encoder->encodePassword($user, $password ));
     	    $em->persist($user);

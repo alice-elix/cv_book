@@ -43,6 +43,12 @@ h2{
 .fab{
 	margin-top: 1rem;
 }
+textarea{
+	resize: none;
+}
+.hidden{
+	display: none;
+}
 
 /*sections*/
 section{
@@ -58,6 +64,14 @@ section{
 
 .light-part{
 	color: #423634;
+}
+.light-form{
+	background-image: radial-gradient(circle, #feeeec, #feeeec, #feeeec, #feeeec, #feeeec, #feefef, #fef1f2, #fef2f4, #fdf5f9, #fdf9fc, #fdfcfe, #ffffff);
+
+}
+.dark-form{
+	background: transparent!important;
+	border: none;
 }
 
 /*navbar*/
@@ -117,11 +131,29 @@ section{
 .btn-login:hover{
 	color: #423634;
 }
+.btn-login:focus{
+	box-shadow: none;
+}
 
 /*formulaire*/
 .col-form{
 	display: flex;
 	flex-direction: column;
+}
+.col-form .alert-danger{
+	padding: 0;
+	margin: 1vw 0;
+}
+
+.col-form .alert-danger ul{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.row-error{
+	margin:0;
+	padding: 0;
+	align-items: center;
 }
 
 /*******accueil*/
@@ -203,6 +235,10 @@ section{
 }
 
 /*contact*/
+.extraMargin{
+	margin-top: 8vh;
+	margin-bottom: 8vh;
+}
 
 /*pol conf*/
 
@@ -213,8 +249,39 @@ section{
 	background-image: linear-gradient(to right bottom, #423634, #423634, #423634, #423634, #423634, #3e3331, #3b302e, #372d2b, #2f2625, #26201e, #1f1a18, #171312);
 }
 
-/**show***/
+/*******show*/
 #resum h2{
 	color: #feeeec;
 }
+
+.context-14{
+	background: url(../images/context_pcf.png),	radial-gradient(circle, #feeeec, #feeeec, #feeeec, #feeeec, #feeeec, #feefef, #fef1f2, #fef2f4, #fdf5f9, #fdf9fc, #fdfcfe, #ffffff);
+	background-repeat: no-repeat;
+	background-size: 30%, 100%;
+	background-position: top right; 
+}
+/*context*/
+.context-16{
+	background: url(../images/context_mc.png),	radial-gradient(circle, #feeeec, #feeeec, #feeeec, #feeeec, #feeeec, #feefef, #fef1f2, #fef2f4, #fdf5f9, #fdf9fc, #fdfcfe, #ffffff);
+	background-repeat: no-repeat;
+	background-size: 30%, 100%;
+	background-position: top right; 
+}
+
+.context-17{
+	background: url(../images/context_bee.png),	radial-gradient(circle, #feeeec, #feeeec, #feeeec, #feeeec, #feeeec, #feefef, #fef1f2, #fef2f4, #fdf5f9, #fdf9fc, #fdfcfe, #ffffff);
+	background-repeat: no-repeat;
+	background-size: 30%, 100%;
+	background-position: top right; 
+}
+
+.zoom img{
+	transition: all 1s ease;
+}
+.zoom:hover img { 
+	transform:scale(2.25);
+	z-index: 1000; 
+}
+
+
 

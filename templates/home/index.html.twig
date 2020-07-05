@@ -70,7 +70,7 @@
 					<div class="col-3 img-col">
 						<figure class="album-fig">
 						    <img class="img-fluid" src="../images/8.png">
-						    <figcaption class="album-title"><b>Travaille en équipe</b></figcaption>
+						    <figcaption class="album-title"><b>Efficace en équipe</b></figcaption>
 						</figure>
 					</div>
 					<div class="col-3 img-col">
@@ -91,20 +91,18 @@
 		<div class="row">
             <div class="col-12 col-lg-4">  
                 <span class="testimonial ">
-                	<p class="testimonial-text">Ici la recommandation qui doit faire au maximum tant de caractères<i>Nom de la personne</i></p>
+                	<p class="testimonial-text"><i>Témoignage1</i></p>
                 	       
                 </span>
             </div>
             <div class="col-12 col-lg-4">  
                 <span class="testimonial ">
-                	<p class="testimonial-text">Ici la recommandation</p>
-                	<p class="text-right"><i>Nom de la personne</i></p>        
+                	<p class="testimonial-text"><i>Témoignage2</i></p>        
                 </span>
             </div>
             <div class="col-12 col-lg-4">  
                 <span class="testimonial ">
-                	<p class="testimonial-text">Ici la recommandation</p>
-                	<p class="text-right"><i>Nom de la personne</i></p>        
+                	<p class="testimonial-text"><i>Témoignage3</i></p>        
                 </span>
             </div>
         </div>
@@ -114,9 +112,9 @@
 <section id="framework">
 	<div class="container framework-container">
 		<h2>Quelques outils</h2>
-		<p>La plupart des projets sur lesquels j'ai travaillé ont été codé dans les languages web classiques : HTML5, CSS3, JavaScript, PHP et SQL pour les bases de données.<br>
-		Avec ces langages, j'ai utilisé des "frameworks" c'est à dire des boites à outils : jQuery pour JavaScript et Symfony pour PHP. Bootstrap a aussi été très utile pour la gestion du front-end. Pour les bases de données, j'ai souvent utilisé MySQL. Certains sites ont été créés avec le CMS WordPress, avec la création d'un plugin pour l'un, des corrections de bug dans le thème pour d'autres.<br>
-		Pour le travail en équipe, j'utilise principalement Git, Slack et Trello.</p>
+		<p>La plupart des projets sur lesquels j'ai travaillé ont été codés dans les languages web classiques : HTML5, CSS3, JavaScript, PHP et SQL pour les bases de données.<br>
+		Avec ces langages, j'ai utilisé des "frameworks" c'est à dire des boites à outils : jQuery pour JavaScript et Symfony pour PHP. Bootstrap a aussi été très utile pour la gestion du front-end. Pour les bases de données, j'ai souvent utilisé MySQL. Certains sites ont été réalisés avec le CMS WordPress, incluant la création d'un plugin pour l'un, des corrections de bug dans le thème pour d'autres.<br>
+		Pour le travail en équipe, j'utilise principalement GitHub, Slack et Trello.</p>
 		<p class="mb-0">Ces quelques sigles vous sembleront peut être familiers ? </p>
 		<!-- <img src="../images/5_2.png" />	 -->
 		<div class="fullscreen">			
@@ -314,21 +312,21 @@
 			    	</div>
 			  	</div><!--Card BDD-->
 			
-				
-
 			</div><!--div accordion-->
 		</div><!--div smallscreen-->
 	</div>	<!--div container-->
 </section>
 
-<section id="contact" class="dark-part">
-	<div class="container text-center">
+<section id="contact" class="dark-part ">
+	<div class="container text-center extraMargin" id="contact-container">
 		<h2>Vous avez envie de renforcer votre équipe ? </h2>
-		<p>J'ai plein d'idées et je suis disponible ! Discutons-en !</p>
-		<button class="btn btn-login" type="button" data-toggle="collapse" data-target="#collapseForm" aria-expanded="false" aria-controls="collapseForm">Formulaire de contact</button>
+		<p>J'ai plein d'idées, je suis disponible et très motivée ! </p>
+		<button class="btn btn-login" type="button" data-toggle="collapse" data-target="#collapseForm" aria-expanded="false" aria-controls="collapseForm" id="buttonShowForm">Discutons-en !</button>
+		<button class="btn btn-login hidden" type="button" data-toggle="collapse" data-target="#collapseForm" aria-expanded="false" aria-controls="collapseForm" id="buttonMaskForm">Masquer le formulaire</button>
     	<div class="collapse" id="collapseForm">
-      		<div class="card card-body light-part">
-        		Ici le formulaire de contact
+      		<div class="card card-body dark-form">
+        		{{ include('mails/_form-ct.html.twig', {form: form }) }}
+        		<a href="mailto:contact@gaelle-david.cmoi.cc" id="linkMaskForm"><em>Passer plutôt par un email</em></a>
       		</div>
     	</div>
 	</div>
@@ -338,6 +336,14 @@
 {% endblock %}
 
 {% block javascripts %}
+<!-- <script type="text/javascript">
+	$('form').submit(function(e) { //Validation du formulaire
+		
+
+
+	});
+</script> -->
+
 <script type="text/javascript">
 	$(function() {	
 		$('.circle').circlemouse({
@@ -362,7 +368,7 @@
 		}
 	});
 </script>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
 <script type="text/javascript" src="js/jquery.circlemouse.js"></script>
 <script type="text/javascript" src="js/jquery.hoverfold.js"></script>
 

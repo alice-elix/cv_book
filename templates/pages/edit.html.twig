@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ page_name }}{% endblock %}
+
+
+{% block body %}
+<section class="dark-part" id="register">
+<div class="container ">
+	{% for message in app.flashes('success') %}
+		<div class="alert alert-success">
+			{{ message }}
+		</div>
+	{% endfor %}
+
+	{{ include('pages/_form-pj.html.twig', {form: form, button: 'Enregistrer les modifs' }) }}
+
+	<form class="m-2"method="post" action="{{ path('del-projet', {id: projet.id}) }}" style="display: inline-block;" onsubmit="return confirm('Voulez-vous vraiment supprimer ce projet ?')">
+		<input type="hidden" name="_method" value="DELETE">
+		<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ projet.id)}}">
+		<button class="btn btn-danger"><i class="fas fa-trash"></i></button>
+	</form>
+</div>
+</section>
+{% endblock %}

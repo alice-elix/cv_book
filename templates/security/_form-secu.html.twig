@@ -1,6 +1,13 @@
 {{ form_start(form) }}
 
 	<div class="form-group">
+		<div class="row d-flex justify-content-center">
+			{% if form_errors(form) is not empty %}
+			<div class="col-12 col-form alert alert-danger">
+				 {{ form_errors(form) }}
+			</div>
+			{%endif%}
+		</div>
 		<div class="row">
 			<div class="col-12 col-form">
 			{{ form_label(form.username) }}
