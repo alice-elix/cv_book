@@ -54,7 +54,7 @@ class PagesController extends AbstractController
     	$part = $projet->getStructureName();
     	$photos = $em->getRepository(Images::class)->findAll(['id'=>$projet]);
     	$presentationPict = $em->getRepository(Images::class)->findByField('presentation_pict', $id);	
-    	$contextPict = $em->getRepository(Images::class)->findByField('context_pict', $id);
+    	// $contextPict = $em->getRepository(Images::class)->findByField('context_pict', $id);
     	$frameworkPict = $em->getRepository(Images::class)->findByField('framework_pict', $id);
     	$resultPict = $em->getRepository(Images::class)->findByField('result_picture', $id);
 
@@ -101,8 +101,7 @@ class PagesController extends AbstractController
 					$this->getParameter('images_directory'),
 					$presentationPictFileName
 				);
-				$pj->setPresentationPict($presentationPictFileName);
-    			
+                $pj->setPresentationPict($presentationPictFileName);    			
     			/*stock l'image en bdd - son nom*/
     			$img1 = new Images();
     			$img1->setName($presentationPictFileName);
@@ -111,24 +110,24 @@ class PagesController extends AbstractController
             }
 
 			/** @var UploadedFile $contextPictFile */
-			$contextPictFile = $form->get('context_pict')->getData();
-			$contextPictField = $form->get('context_pict')->getName();
+			// $contextPictFile = $form->get('context_pict')->getData();
+			// $contextPictField = $form->get('context_pict')->getName();
 
-			if (isset($contextPictFile)){
-    			$originalFilename = pathinfo($contextPictFile->getClientOriginalName(), PATHINFO_FILENAME);
-    			$safeFilename = $slugger->slug($originalFilename);
-    			$contextPictFileName = $safeFilename.'-'.uniqid().'.'.$contextPictFile->guessExtension();
-    			$contextPictFile->move(
-    				$this->getParameter('images_directory'),
-    				$contextPictFileName
-    			);
-    			$pj->setContextPict($contextPictFileName);
-    			/*stock l'image en bdd - son nom*/
-    			$img2 = new Images();
-    			$img2->setName($contextPictFileName);
-    			$img2->setField($contextPictField);
-    			$pj->addImage($img2);
-			}
+			// if (isset($contextPictFile)){
+   //  			$originalFilename = pathinfo($contextPictFile->getClientOriginalName(), PATHINFO_FILENAME);
+   //  			$safeFilename = $slugger->slug($originalFilename);
+   //  			$contextPictFileName = $safeFilename.'-'.uniqid().'.'.$contextPictFile->guessExtension();
+   //  			$contextPictFile->move(
+   //  				$this->getParameter('images_directory'),
+   //  				$contextPictFileName
+   //  			);
+   //  			$pj->setContextPict($contextPictFileName);
+   //  			/*stock l'image en bdd - son nom*/
+   //  			$img2 = new Images();
+   //  			$img2->setName($contextPictFileName);
+   //  			$img2->setField($contextPictField);
+   //  			$pj->addImage($img2);
+			// }
 
 			/** @var UploadedFile $frameworkPictFiles */
 			$frameworkPictFiles = $form->get('framework_pict')->getData();
@@ -143,7 +142,6 @@ class PagesController extends AbstractController
 				 		$this->getParameter('images_directory'),
 				 		$frameworkPictFileName
 				 	);
-				 	$pj->setFrameworkPict($frameworkPictFileName);
     				/*stock l'image en bdd - son nom*/
     				$img3 = new Images();
     				$img3->setName($frameworkPictFileName);
@@ -165,7 +163,6 @@ class PagesController extends AbstractController
 						$this->getParameter('images_directory'),
 						$resultPictFileName
 					);
-					$pj->setResultPicture($resultPictFileName);
     				/*stock l'image en bdd - son nom*/
     				$img4 = new Images();
     				$img4->setName($resultPictFileName);
@@ -209,13 +206,23 @@ class PagesController extends AbstractController
         
         $em = $this->getDoctrine()->getManager(); 
 
-        $oldPresentationPict = $em->getRepository(Images::class)->findByField('presentation_pict', $id);   
-        $oldContextPict = $em->getRepository(Images::class)->findByField('context_pict', $id);
-        $oldFrameworkPict = $em->getRepository(Images::class)->findByField('framework_pict', $id);
-        $oldResultPict = $em->getRepository(Images::class)->findByField('result_picture', $id);
+        $oldPresentationPict = $em->getRepository(Images::class)->findByField('presentation_pict', $id);
+        if(!empty($oldPresentationPict)){
+            $oldPresentationPictPath = $pathPict.$oldPresentationPict[0]->getName();
+        }   
+
+        // $oldContextPict = $em->getRepository(Images::class)->findByField('context_pict', $id);
+
+        $oldFrameworkPicts = $em->getRepository(Images::class)->findByField('framework_pict', $id);
+
+        $oldResultPicts = $em->getRepository(Images::class)->findByField('result_picture', $id);
         
         dump($oldPresentationPict);
-
+        dump($oldFrameworkPicts);
+        dump($oldResultPicts);
+        // if(!empty($oldPresentationPict)){
+        //     dump($pathPict.$oldPresentationPict[0]->getName());
+        // }
 
         if($form->isSubmitted() && $form->isValid()){
 
@@ -224,9 +231,12 @@ class PagesController extends AbstractController
             $presentationPictField = $form->get('presentation_pict')->getName();
 
             if (isset($presentationPictFile)){
-                // if($oldPresentationPict != null){
-                //     unlink($this->pathPict.$oldPresentationPict);
-                // }
+                /*suppression des anciennes photos*/
+                if($oldPresentationPict != null){
+                    unlink($oldPresentationPictPath);
+                    $this->em->remove($oldPresentationPict[0]);
+                    $this->em->flush();
+                }
 
                 $originalFilename = pathinfo($presentationPictFile->getClientOriginalName(), PATHINFO_FILENAME);
                 $safeFilename = $slugger->slug($originalFilename);
@@ -236,7 +246,6 @@ class PagesController extends AbstractController
                     $presentationPictFileName
                 );
                 $pj->setPresentationPict($presentationPictFileName);
-                
                 /*stock l'image en bdd - son nom*/
                 $img1 = new Images();
                 $img1->setName($presentationPictFileName);
@@ -245,30 +254,40 @@ class PagesController extends AbstractController
             }
 
             /** @var UploadedFile $contextPictFile */
-            $contextPictFile = $form->get('context_pict')->getData();
-            $contextPictField = $form->get('context_pict')->getName();
+            // $contextPictFile = $form->get('context_pict')->getData();
+            // $contextPictField = $form->get('context_pict')->getName();
 
-            if (isset($contextPictFile)){
-                $originalFilename = pathinfo($contextPictFile->getClientOriginalName(), PATHINFO_FILENAME);
-                $safeFilename = $slugger->slug($originalFilename);
-                $contextPictFileName = $safeFilename.'-'.uniqid().'.'.$contextPictFile->guessExtension();
-                $contextPictFile->move(
-                    $this->getParameter('images_directory'),
-                    $contextPictFileName
-                );
-                $pj->setContextPict($contextPictFileName);
-                /*stock l'image en bdd - son nom*/
-                $img2 = new Images();
-                $img2->setName($contextPictFileName);
-                $img2->setField($contextPictField);
-                $pj->addImage($img2);
-            }
+            // if (isset($contextPictFile)){
+            //     $originalFilename = pathinfo($contextPictFile->getClientOriginalName(), PATHINFO_FILENAME);
+            //     $safeFilename = $slugger->slug($originalFilename);
+            //     $contextPictFileName = $safeFilename.'-'.uniqid().'.'.$contextPictFile->guessExtension();
+            //     $contextPictFile->move(
+            //         $this->getParameter('images_directory'),
+            //         $contextPictFileName
+            //     );
+            //     $pj->setContextPict($contextPictFileName);
+            //     /*stock l'image en bdd - son nom*/
+            //     $img2 = new Images();
+            //     $img2->setName($contextPictFileName);
+            //     $img2->setField($contextPictField);
+            //     $pj->addImage($img2);
+            // }
 
             /** @var UploadedFile $frameworkPictFiles */
             $frameworkPictFiles = $form->get('framework_pict')->getData();
             $frameworkPictField = $form->get('framework_pict')->getName();
 
-            if (isset($frameworkPictFiles)){
+            if (!empty($frameworkPictFiles)){
+                /*suppression des anciennes photos*/
+                if($oldFrameworkPicts != null){
+                    foreach ($oldFrameworkPicts as $oldFrameworkPict) {
+                        $oldFrameworkPictPath = $pathPict.$oldFrameworkPict->getName();
+                        unlink($oldFrameworkPictPath);
+                        $this->em->remove($oldFrameworkPict);
+                        $this->em->flush();
+                    }
+                }
+
                 foreach ($frameworkPictFiles as $frameworkPictFile){
                     $originalFilename = pathinfo($frameworkPictFile->getClientOriginalName(), PATHINFO_FILENAME);
                     $safeFilename = $slugger->slug($originalFilename);
@@ -277,7 +296,6 @@ class PagesController extends AbstractController
                         $this->getParameter('images_directory'),
                         $frameworkPictFileName
                     );
-                    $pj->setFrameworkPict($frameworkPictFileName);
                     /*stock l'image en bdd - son nom*/
                     $img3 = new Images();
                     $img3->setName($frameworkPictFileName);
@@ -290,7 +308,17 @@ class PagesController extends AbstractController
             $resultPictFiles = $form->get('result_picture')->getData();
             $resultPictField = $form->get('result_picture')->getName();
 
-            if (isset($resultPictFiles)){
+            if (!empty($resultPictFiles)){
+                /*suppression des anciennes photos*/
+                if(($oldResultPicts)!= null){
+                    foreach ($oldResultPicts as $oldResultPict) {
+                        $oldResultPictPath = $pathPict.$oldResultPict->getName();
+                        unlink($oldResultPictPath);
+                        $this->em->remove($oldResultPict);
+                        $this->em->flush();
+                    }
+                }
+
                 foreach ($resultPictFiles as $resultPictFile){
                     $originalFilename = pathinfo($resultPictFile->getClientOriginalName(), PATHINFO_FILENAME);
                     $safeFilename = $slugger->slug($originalFilename);
@@ -299,7 +327,6 @@ class PagesController extends AbstractController
                         $this->getParameter('images_directory'),
                         $resultPictFileName
                     );
-                    $pj->setResultPicture($resultPictField);
                     /*stock l'image en bdd - son nom*/
                     $img4 = new Images();
                     $img4->setName($resultPictFileName);

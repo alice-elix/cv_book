@@ -47,22 +47,22 @@ class ProjectsType extends AbstractType
             ->add('context_paragraph', TextareaType::class, [
                 'label' => 'Paragraphe de contextualisation du projet'
             ])
-            ->add('context_pict', FileType::class, [
-                'label' => 'Icone d\'illustration',
-                'mapped' => false,
-                'required' => false,
-                'constraints' => [
-                    new File([
-                        'maxSize'=> '1024k',
-                        'mimeTypes'=> [
-                            'image/jpg',
-                            'image/png',
-                            'image/jpeg'
-                        ],
-                        'mimeTypesMessage' => 'Sélectionner un format image PNG, JPG ou JPEG',
-                    ])
-                ],
-            ])
+            // ->add('context_pict', FileType::class, [
+            //     'label' => 'Icone d\'illustration',
+            //     'mapped' => false,
+            //     'required' => false,
+            //     'constraints' => [
+            //         new File([
+            //             'maxSize'=> '1024k',
+            //             'mimeTypes'=> [
+            //                 'image/jpg',
+            //                 'image/png',
+            //                 'image/jpeg'
+            //             ],
+            //             'mimeTypesMessage' => 'Sélectionner un format image PNG, JPG ou JPEG',
+            //         ])
+            //     ],
+            // ])
             ->add('explain_paragraph', TextareaType::class, [
                 'label' => 'Paragraphe de présentation du projet (outils, équipe...)'
             ])

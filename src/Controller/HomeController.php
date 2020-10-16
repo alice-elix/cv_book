@@ -7,6 +7,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 use App\Repository\ProjetsRepository;
 use App\Entity\Projets;
+use App\Entity\Images;
 
 use App\Entity\Mails;
 use App\Form\MailType;
@@ -52,7 +53,8 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig', [
             'page_name' => 'Accueil',
             'form'=>$form->createView(),
-            'projets' => $projets
+            'projets' => $projets,
+            
         ]);
     }
 

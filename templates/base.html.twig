@@ -18,8 +18,11 @@
       <div class="container">
       	<nav class="navbar navbar-expand-lg navbar-perso">
         	  <a class="navbar-brand" href="{{path('home')}}">Gaëlle D.</a>
-        	  <button class="navbar-toggler dark-btn" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        	    <span class="navbar-toggler-icon dark-btn"><i class="fas fa-caret-down"></i></span>
+        	  <button id="caret"class="navbar-toggler dark-btn" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        	    <span class="navbar-toggler-icon dark-btn">
+                <i id="caret-down" class="fas fa-caret-down"></i>
+                <i id="caret-up"class="fas fa-caret-up hidden"></i>
+              </span>
         	  </button>
       	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
       	    <ul class="navbar-nav mr-auto">

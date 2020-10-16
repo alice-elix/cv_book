@@ -28,6 +28,8 @@ class FileUploader
             $this->getTargetDirectory(), 
             $fileName
         );
+
+        return $fileName;
     }
 
     public function getTargetDirectory()

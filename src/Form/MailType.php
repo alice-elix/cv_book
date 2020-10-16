@@ -28,7 +28,7 @@ class MailType extends AbstractType
                 'trim' => true
             ])
             ->add('tel', TextType::class, [
-                'label' => 'Votre numéro de téléphone (facultatif)',
+                'label' => 'Votre téléphone (facultatif)',
                 'required' =>false,
                 'trim' => true
             ])

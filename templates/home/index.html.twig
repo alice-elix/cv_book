@@ -22,10 +22,10 @@
 	<div class="container">
 		<h1>Réalisations</h1>
 		<p > Voici quelques-unes de mes réalisations. Vous pouvez me contacter pour plus d'informations par <a href="#contact">ici</a> et retrouver le code de ce site sur GitHub par <a href="https://github.com/alice-elix/cv_book">là</a>.</p>
-		<div class="row">    
+		<div class="row justify-content-center">    
 			<!-- loop qui va chercher les images des projets -->
 			{% for  p in projets %}
-			    <div class=" col-lg-4 d-flex justify-content-center">  
+			    <div class=" col-md-6 col-lg-4 d-flex justify-content-center">  
 				    <div id="grid1" class="main grid">
 						<div class="view">
 							<div class="view-back">
@@ -88,22 +88,21 @@
 <section id="testimonials" class="dark-part">
 	<div class="container">
 		<h2>Retour d'expérience</h2>
-		<div class="row">
-            <div class="col-12 col-lg-4">  
-                <span class="testimonial ">
-                	<p class="testimonial-text"><i>Témoignage1</i></p>
-                	       
-                </span>
+		<div class="row justify-content-center">
+            <div class="col-12 col-sm-6 col-lg-4"> 
+            	<figure class="album-fig">
+            	    <img class="img-fluid" src="../images/2_2_1.png">
+            	</figure> 
             </div>
-            <div class="col-12 col-lg-4">  
-                <span class="testimonial ">
-                	<p class="testimonial-text"><i>Témoignage2</i></p>        
-                </span>
+            <div class="col-12 col-sm-6 col-lg-4">  
+                <figure class="album-fig">
+            	    <img class="img-fluid" src="../images/2_2_2.png">
+            	</figure>
             </div>
-            <div class="col-12 col-lg-4">  
-                <span class="testimonial ">
-                	<p class="testimonial-text"><i>Témoignage3</i></p>        
-                </span>
+            <div class="col-12 col-sm-6 col-lg-4">  
+                <figure class="album-fig">
+            	    <img class="img-fluid" src="../images/2_2_3.png">
+            	</figure>
             </div>
         </div>
 	</div>	
@@ -189,9 +188,9 @@
 			<div class="accordion" id="accordionFramework">
 			  	<div class="card">
 			    	<div class="card-header" id="headingOne">
-			      		<h5 class="mb-0">
+			      		<h3 class="mb-0">
 			        		<button class="btn btn-link btn-accordion" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Front-end</button>
-			      		</h5>
+			      		</h3>
 			    	</div>
 			    	<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionFramework">
 			      		<div class="card-body">
@@ -209,7 +208,7 @@
 									<div class="section"> 
 										<div class="normal-trigger-area">
 											<a href="#framework" id="circle2Bis" class="ec-circle circlemouse2 circle">
-												<h3>CSS3</h3>
+												<h4>CSS3</h4>
 											</a>
 										</div>
 									</div>
@@ -220,9 +219,9 @@
 			  	</div><!--Card FE-->
 			  	<div class="card">
 			    	<div class="card-header" id="headingTwo">
-			      		<h5 class="mb-0">
+			      		<h3 class="mb-0">
 			        		<button class="btn btn-link collapsed btn-accordion" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Fluidité</button>
-			      		</h5>
+			      		</h3>
 			    	</div>
 			    	<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionFramework">
 			      		<div class="card-body">
@@ -231,7 +230,7 @@
 									<div class="section"> 
 										<div class="normal-trigger-area">
 											<a href="#framework" id="circle3Bis" class="ec-circle circlemouse3 circle">
-												<h3>Javascript</h3>
+												<h4>Javascript</h4>
 											</a>
 										</div>
 									</div>
@@ -240,7 +239,7 @@
 									<div class="section"> 
 										<div class="normal-trigger-area">
 											<a href="#framework" id="circle4Bis" class="ec-circle circle">
-												<h3>jQuery</h3>
+												<h4>jQuery</h4>
 											</a>
 										</div>
 									</div>
@@ -251,9 +250,9 @@
 			  	</div><!--Card JS-->
 			  	<div class="card">
 			    	<div class="card-header" id="headingThree">
-			      		<h5 class="mb-0">
+			      		<h3 class="mb-0">
 			        		<button class="btn btn-link collapsed btn-accordion" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Back-end</button>
-			      		</h5>
+			      		</h3>
 			    	</div>
 			    	<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionFramework">
 			      		<div class="card-body">
@@ -262,7 +261,7 @@
 			        				<div class="section"> 
 			        					<div class="normal-trigger-area">
 			        						<a href="#framework" id="circle5Bis" class="ec-circle circle">
-			        							<h3>PHP</h3>
+			        							<h4>PHP</h4>
 			        						</a>
 			        					</div>
 			        				</div>
@@ -271,7 +270,7 @@
 			        				<div class="section"> 
 			        					<div class="normal-trigger-area">
 			        						<a href="#framework" id="circle6Bis" class="ec-circle circle">
-			        							<h3>Symfony</h3>
+			        							<h4>Symfony</h4>
 			        						</a>
 			        					</div>
 			        				</div>
@@ -282,9 +281,9 @@
 			  	</div><!--Card BE-->
 			  	<div class="card">
 			    	<div class="card-header" id="headingFour">
-			      		<h5 class="mb-0">
+			      		<h3 class="mb-0">
 			        		<button class="btn btn-link collapsed btn-accordion" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">Bases de données</button>
-			      		</h5>
+			      		</h3>
 			    	</div>
 			    	<div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionFramework">
 			      		<div class="card-body">
@@ -293,7 +292,7 @@
 									<div class="section"> 
 										<div class="normal-trigger-area">
 											<a href="#framework" id="circle7Bis" class="ec-circle circle">
-												<h3>SQL</h3>
+												<h4>SQL</h4>
 											</a>
 										</div>
 									</div>
@@ -302,7 +301,7 @@
 									<div class="section"> 
 										<div class="normal-trigger-area">
 											<a href="#framework" id="circle8Bis" class="ec-circle circle">
-												<h3>MySQL</h3>
+												<h4>MySQL</h4>
 											</a>
 										</div>
 									</div>	

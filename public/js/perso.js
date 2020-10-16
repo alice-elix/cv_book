@@ -6,7 +6,6 @@ $(document).ready(function(){
 		$('#contact-container').removeClass('extraMargin');
 		$('#linkMaskForm').removeClass('hidden');
 		$('#buttonMaskForm').removeClass('hidden');
-		// window.scrollTo(0,2500);
 	});
 	$('#buttonMaskForm').on('click',function() {
 		$(this).addClass('hidden');
@@ -15,10 +14,20 @@ $(document).ready(function(){
 		$('#linkShowForm').removeClass('hidden');
 		$('#buttonShowForm').removeClass('hidden');
 	});
-	// $('#submit').on('click', function(){
-	// 	$(this).scrollTo('#target')();
 
-	// });
+	$('#caret').on('click', function(){
+		if($('#caret-up').hasClass('hidden')){
+			$('#caret-up').removeClass('hidden');
+			$('#caret-down').addClass('hidden');
+		}
+		else{
+			$('#caret-up').addClass('hidden');
+			$('#caret-down').removeClass('hidden');	
+		}
+
+	});
+	
+			
 	$('#form-ajax').submit(function(e) { //Validation du formulaire
 		e.preventDefault();
 		console.log("bazinga");

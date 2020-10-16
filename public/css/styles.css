@@ -90,6 +90,15 @@ section{
 	color: #feeeec!important;
 }
 
+.fa-caret-down,
+.fa-caret-up{
+	color: #50b4bf!important;
+}
+.fa-caret-down:hover,
+.fa-caret-up:hover{
+	color: #feeeec!important;
+}
+
 .light-menu a{
 	color: #50b4bf!important;
 }
@@ -168,10 +177,8 @@ section{
 
 /*testimonials*/
 .testimonial{
-	display: flex;
-	height: 50vh;
-	background: #feeeec;
-	background: url(../images/2_2.png);
+	display: flex;	
+	height: 25vh;
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center;
@@ -181,8 +188,10 @@ section{
 	align-items: center;
 	justify-content: center;
 }
-.testimonial-text{
-	margin: 3vh 4vw;	
+@media (min-width: 576px) {
+	.testimonial{
+	height: 50vh;
+	}
 }
 
 /*framework*/
@@ -222,10 +231,17 @@ section{
 #accordionFramework #headingThree{
 	text-align: right;
 }
-.btn-accordion,
-.btn-accordion:hover{
+.btn-accordion{
 	color: #50b4bf!important;
 	text-decoration: none!important;
+}
+
+.btn-accordion:hover{
+	color: #423634!important;
+
+}
+.smallscreen{
+	padding-bottom: 1vh;
 }
 
 @media (min-width: 992px) {
